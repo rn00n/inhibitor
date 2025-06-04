@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: ${jpa.ddl-auto}
+
+datasources:
+  databases:
+    rn00n:
+      inhibitor:
+        url: ${datasources.rn00n.inhibitor.instance}/${datasources.rn00n.inhibitor.db-name}${datasources.rn00n.inhibitor.env:}
+        username: ${datasources.rn00n.inhibitor.username}
+        password: ${datasources.rn00n.inhibitor.password}
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        replica-url: ${datasources.rn00n.inhibitor.replica-instance}/${datasources.rn00n.inhibitor.db-name}${datasources.rn00n.inhibitor.env:}
+        max_pool_size: ${datasources.rn00n.inhibitor.max_pool_size}
+        min_idle: ${datasources.rn00n.inhibitor.min_idle}
+        ddl-auto: ${jpa.ddl-auto}

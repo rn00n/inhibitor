@@ -1,0 +1,26 @@
+<th:block th:fragment="searchable-table(searchInputId, tableBodyId)">
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="검색어를 입력하세요..." th:attr="id=${searchInputId}">
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <span id="totalElementsLabel" class="text-muted small">총 0건</span>
+    </div>
+
+    <div class="table-responsive" style="height: 100%;">
+        <table class="table table-hover align-middle mb-0 w-100">
+            <thead class="table-light">
+            <tr>
+                <th style="width: 40px;"><input class="form-check-input" type="checkbox" id="checkAll"></th>
+            </tr>
+            </thead>
+            <tbody th:attr="id=${tableBodyId}">
+            <!-- JS 주입 -->
+            </tbody>
+        </table>
+    </div>
+
+    <nav class="d-flex justify-content-center mt-4">
+        <ul class="pagination pagination-sm mb-0" id="paginationBar"></ul>
+    </nav>
+</th:block>

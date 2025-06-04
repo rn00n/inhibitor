@@ -1,0 +1,55 @@
+server:
+  port: 8080
+#  scheme: ${server.scheme:http}
+#  host: ${server.host:localhost}
+#  port: ${server.port:8080}
+
+logging:
+  level:
+#    root: trace
+#    org.springframework: debug
+    org.hibernate.SQL: DEBUG           # 실제 SQL
+#    org.hibernate.orm.jdbc.bind: TRACE # 바인딩된 파라미터
+
+spring:
+  application:
+    name: inhibitor
+
+  config:
+    import:
+      - "application-database.yml"
+      - "application-redis.yml"
+
+  security:
+    oauth2:
+      authorizationserver:
+        jwt:
+          key-id: ${jwt.key-id}
+          private-key: ${jwt.private-key}
+          public-key: ${jwt.public-key}
+
+springdoc:
+  swagger-ui:
+    path: /docs
+    enabled: false
+  api-docs:
+    path: /swagger-docs  # OpenAPI JSON 내려주는 경로
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      base-path: /_
+      exposure:
+        include: health,info,prometheus
+
+  endpoint:
+    health:
+      show-details: always
+
+  health:
+    vault:
+      enabled: true
+
+initialization:
+  security: false

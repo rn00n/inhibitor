@@ -1,0 +1,12 @@
+spring:
+  data:
+    redis:
+      host: ${redis.host}
+      port: ${redis.port}
+      timeout: ${redis.command_timeout}
+      database: ${redis.database}
+      lettuce:
+        pool:
+          max-active: ${redis.max_total}
+          max-idle: ${redis.max_idle}
+          min-idle: ${redis.min_idle}

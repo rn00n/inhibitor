@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="backoffice/fragments/common/common-head :: common-head('Backoffice Home')"></th:block>
+</head>
+<body>
+<th:block th:replace="backoffice/fragments/common/navbar :: navbar"></th:block>
+
+<th:block th:replace="backoffice/fragments/common/toast-ui :: toast-ui"></th:block>
+
+<main class="container-fluid px-4 py-5" style="max-width: 1200px; margin: 0 auto;">
+    <section class="bg-white rounded-3 shadow-sm p-4">
+        <th:block th:replace="backoffice/fragments/clients/searchable-client-table :: searchable-table"/>
+    </section>
+</main>
+
+<th:block th:replace="backoffice/fragments/common/base-script :: base-script"/>
+<script th:src="@{/js/clients/client.js}" type="module"></script>
+
+</body>
+</html>

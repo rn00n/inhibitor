@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    vault:
+      uri: ${moon.external.vault.url}
+      connection-timeout: 5000
+      read-timeout: 15000
+      kv: # Vault KV 백엔드 정보 (버전 2 기준)
+        enabled: true
+        application-name: ${spring.profiles.active}
+        backend: inhibitor
+        default-context: ${spring.profiles.active}
+        profiles:
+      token: ${moon.vault.token}
+      authentication: TOKEN # 인증 방식 선택: TOKEN 또는 APPROLE 또는 KUBERNETES
+      fail-fast: true
