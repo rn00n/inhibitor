@@ -152,6 +152,7 @@ class OAuth2OriginRefreshTokenAuthenticationProvider(
         if (idToken != null) {
             additionalParameters[OidcParameterNames.ID_TOKEN] = idToken.tokenValue
         }
+        additionalParameters.put("provider_id", userPrincipal.id)
 
         return OAuth2AccessTokenAuthenticationToken(
             registeredClient, clientPrincipal, accessToken, currentRefreshToken, additionalParameters

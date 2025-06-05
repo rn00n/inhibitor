@@ -1,5 +1,6 @@
 package com.rn00n.inhibitor.application.auth.grant.origin.reissue
 
+import com.rn00n.inhibitor.application.auth.model.principal.UserPrincipal
 import com.rn00n.inhibitor.application.auth.model.token.OAuth2OriginReissueTokenAuthenticationToken
 import com.rn00n.inhibitor.application.auth.service.userdetails.ExtendedUserDetailsService
 import com.rn00n.inhibitor.application.auth.support.OAuth2OriginAuthenticationProviderSupport
@@ -58,7 +59,10 @@ class OAuth2OriginReissueTokenAuthenticationProvider(
 
         val authorizedScopes = authorization.authorizedScopes
 
-        val userDetails = authorization.getAttribute<Authentication>(Principal::class.java.name)
+        val principal = authorization.getAttribute<Authentication>(Principal::class.java.name)
+
+        val userPrincipal =
+            (principal?.principal as? UserPrincipal) ?: throw OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_REQUEST)
 
         val loginOutput = originLoginUseCase.execute(
             OriginLoginCommand(
@@ -76,6 +80,7 @@ class OAuth2OriginReissueTokenAuthenticationProvider(
         if (idToken != null) {
             additionalParameters[OidcParameterNames.ID_TOKEN] = idToken.tokenValue
         }
+        additionalParameters.put("provider_id", userPrincipal.id)
 
         return OAuth2AccessTokenAuthenticationToken(
             registeredClient, clientPrincipal, accessToken, refreshToken, additionalParameters

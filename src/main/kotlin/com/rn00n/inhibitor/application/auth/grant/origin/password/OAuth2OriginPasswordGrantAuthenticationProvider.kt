@@ -1,8 +1,8 @@
 package com.rn00n.inhibitor.application.auth.grant.origin.password
 
 import com.rn00n.inhibitor.application.auth.event.LoginSuccessEvent
-import com.rn00n.inhibitor.application.auth.exception.ErrorCode
 import com.rn00n.inhibitor.application.auth.exception.DefaultOAuth2AuthenticationException
+import com.rn00n.inhibitor.application.auth.exception.ErrorCode
 import com.rn00n.inhibitor.application.auth.grant.DefaultAuthenticationChecks
 import com.rn00n.inhibitor.application.auth.model.principal.UserPrincipal
 import com.rn00n.inhibitor.application.auth.model.token.OAuth2OriginPasswordAuthenticationToken
@@ -210,6 +210,7 @@ class OAuth2OriginPasswordGrantAuthenticationProvider(
         val additionalParameters: MutableMap<String, Any> = idToken?.let {
             mutableMapOf(OidcParameterNames.ID_TOKEN to it.tokenValue)
         } ?: mutableMapOf()
+        additionalParameters.put("provider_id", userPrincipal.id)
 
         if (this.logger.isTraceEnabled()) {
             this.logger.trace { "Generated refresh token" }

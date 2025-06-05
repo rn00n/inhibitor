@@ -1,10 +1,10 @@
 package com.rn00n.inhibitor.application.auth.grant.origin.password
 
+import com.rn00n.inhibitor.application.auth.grant.ExtendedAuthorizationGrantType
 import com.rn00n.inhibitor.application.auth.model.token.OAuth2OriginPasswordAuthenticationToken
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.core.convert.converter.Converter
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.oauth2.core.AuthorizationGrantType
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationGrantAuthenticationToken
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken
@@ -22,6 +22,9 @@ import org.springframework.security.web.authentication.AuthenticationConverter
 class OAuth2OriginPasswordAuthenticationConverter
     : Converter<HttpServletRequest, OAuth2AuthorizationGrantAuthenticationToken>, AuthenticationConverter {
 
+    private val supportedGrantTypes = setOf(
+        ExtendedAuthorizationGrantType.ORIGIN_PASSWORD.value,
+    )
     /**
      * 주어진 HttpServletRequest에서 OAuth2 토큰 인증 정보를 추출하여 반환합니다.
      *
@@ -32,8 +35,8 @@ class OAuth2OriginPasswordAuthenticationConverter
     override fun convert(request: HttpServletRequest): OAuth2AuthorizationGrantAuthenticationToken? {
         // grant_type 파라미터를 확인하여 password grant 여부 판단
         val grantType: String = request.getParameter(OAuth2ParameterNames.GRANT_TYPE)
-        if (AuthorizationGrantType.PASSWORD.value != grantType) {
-            return null // password grant가 아니라면 null 반환
+        if (!supportedGrantTypes.contains(grantType)) {
+            return null
         }
 
         // 사용자 이름과 비밀번호를 요청 파라미터에서 추출
