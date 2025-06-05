@@ -8,4 +8,5 @@ import java.util.*
 interface AccountRepository {
     fun findById(id: Long): Optional<Account>
     fun findByUsernameContains(keyword: String, pageable: Pageable): Page<Account>
+    fun save(account: Account): Account
 }

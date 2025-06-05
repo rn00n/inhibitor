@@ -18,4 +18,8 @@ class AccountService(
     fun findByUsernameContains(keyword: String, pageable: Pageable): Page<Account> {
         return repository.findByUsernameContains(keyword, pageable)
     }
+
+    fun create(account: Account): Account {
+        return repository.save(account)
+    }
 }

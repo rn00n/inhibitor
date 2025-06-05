@@ -1,6 +1,7 @@
 package com.rn00n.inhibitor.domain.oauth2.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.rn00n.inhibitor.commons.datasources.config.InhibitorDataSourceConfig
 import com.rn00n.inhibitor.domain.oauth2.OAuth2Authorization
 import com.rn00n.inhibitor.domain.oauth2.repo.OAuth2AuthorizationRepository
 import io.github.oshai.kotlinlogging.KotlinLogging
@@ -19,12 +20,12 @@ class OAuth2AuthorizationDomainService(
     private val logger = KotlinLogging.logger {}
     private val blacklistTtl: Duration = Duration.ofDays(1)
 
-    @Transactional(transactionManager = "comicsUserTransactionManager")
+    @Transactional(transactionManager = InhibitorDataSourceConfig.TRANSACTION_MANAGER_BEAN)
     fun revoke(oAuth2Authorization: OAuth2Authorization) {
         repository.delete(oAuth2Authorization)
     }
 
-    @Transactional(transactionManager = "comicsUserTransactionManager")
+    @Transactional(transactionManager = InhibitorDataSourceConfig.TRANSACTION_MANAGER_BEAN)
     fun revokeRefreshToken(token: String) {
         repository.deleteByRefreshTokenValue(token)
     }
@@ -33,7 +34,7 @@ class OAuth2AuthorizationDomainService(
         return repository.findByRefreshTokenValue(token)
     }
 
-    @Transactional(transactionManager = "comicsUserTransactionManager")
+    @Transactional(transactionManager = InhibitorDataSourceConfig.TRANSACTION_MANAGER_BEAN)
     fun revokeTokensByPrincipalName(principalName: String) {
         val authorizations = repository.findByPrincipalName(principalName)
 

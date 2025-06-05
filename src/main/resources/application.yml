@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9090
 #  scheme: ${server.scheme:http}
 #  host: ${server.host:localhost}
 #  port: ${server.port:8080}
@@ -50,6 +50,8 @@ management:
   health:
     vault:
       enabled: true
+    redis:
+      enabled: false
 
 initialization:
   security: false
