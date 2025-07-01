@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk-jammy
+FROM openjdk:21-jdk-slim
 WORKDIR /app
 COPY build/libs/*.jar app.jar
 
