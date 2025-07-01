@@ -45,7 +45,7 @@ class JwtCustomizer : OAuth2TokenCustomizer<JwtEncodingContext> {
             val principal = attributes["java.security.Principal"] as UsernamePasswordAuthenticationToken
             val userPrincipal = principal.principal as UserPrincipal
 
-            context.claims.claim("userId", userPrincipal.id.toString()) // 사용자 ID를 클레임에 추가
+            context.claims.claim("providerId", userPrincipal.id.toString()) // 사용자 ID를 클레임에 추가
             context.get<Int>("refreshThreshold")?.let {
                 context.claims.claim("refreshThreshold", it) // refresh 한계값
             }
