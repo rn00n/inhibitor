@@ -20,4 +20,14 @@ class IndexController {
         return "index"
     }
 
+    @GetMapping("/login")
+    fun login(
+        request: HttpServletRequest,
+        model: Model
+    ): String {
+        model.addAttribute("title", "Hello!")
+        model.addAttribute("url", request.requestURL)
+        return "login"
+    }
+
 }
