@@ -1,6 +1,6 @@
 package com.rn00n.inhibitor.presentation.backoffice.api.profiles
 
-import com.rn00n.inhibitor.application.auth.model.principal.PrincipalUser
+import com.rn00n.inhibitor.application.auth.model.PrincipalUser
 import com.rn00n.inhibitor.domain.accounts.Account
 import io.swagger.v3.oas.annotations.Hidden
 import org.springframework.http.ResponseEntity

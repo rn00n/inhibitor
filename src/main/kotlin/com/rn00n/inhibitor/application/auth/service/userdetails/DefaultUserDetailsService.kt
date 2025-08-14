@@ -1,6 +1,6 @@
 package com.rn00n.inhibitor.application.auth.service.userdetails
 
-import com.rn00n.inhibitor.application.auth.model.principal.UserPrincipal
+import com.rn00n.inhibitor.application.auth.model.UserPrincipal
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException

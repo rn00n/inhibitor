@@ -1,6 +1,6 @@
 package com.rn00n.inhibitor.presentation.inhibitor.api.internal
 
-import com.rn00n.inhibitor.application.auth.model.principal.PrincipalUser
+import com.rn00n.inhibitor.application.auth.model.PrincipalUser
 import com.rn00n.inhibitor.application.tokens.OAuth2AuthorizationService
 import com.rn00n.inhibitor.domain.accounts.Account
 import io.swagger.v3.oas.annotations.Operation
